@@ -1,5 +1,7 @@
 import React from 'react';
-import { Container,Toolbar,AppBar,IconButton,Typography,Box,Paper,Grid,Card,CardMedia,CardContent,CardActions } from '@material-ui/core';
+import { Container,Toolbar,AppBar,IconButton,Typography,Box,
+  Paper,Grid,Card,CardMedia,CardContent,CardActions,Dialog, 
+  DialogContent, TextField,DialogActions,DialogContentText,DialogTitle } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import MenuIcon from '@material-ui/icons/Menu';
 import {makeStyles} from "@material-ui/core/styles";
@@ -71,6 +73,16 @@ function App() {
     setValue(newVal)
   }
 
+  const [open,setOpen]=React.useState(false);
+
+  const handleClickOpen=()=>{
+    setOpen(true)
+  }
+
+  const handleClose=()=>{
+    setOpen(false)
+  }
+
 
   return (
     <>
@@ -85,7 +97,41 @@ function App() {
             <Typography variant="h6" className={classes.title}>AbdulMalik's Website</Typography>
 
             <Box mr={3}>
-              <Button color="inherit" variant="outlined">Log in</Button>
+              <Button color="inherit" variant="outlined" onClick={handleClickOpen}>Log in</Button>
+
+              <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+                <DialogTitle id="form-dialog-title">Log in Modal</DialogTitle>
+
+                <DialogContent>
+                  <DialogContentText> Log in to see videos  </DialogContentText>
+
+                  <TextField
+                    autoFocus
+                    margin="dense"
+                    id="name"
+                    label="Email Address"
+                    type='email'
+                    fullWidth
+                  />
+
+                  <TextField
+                    
+                    margin="dense"
+                    id="pass"
+                    label="Password"
+                    type='password'
+                    fullWidth
+                  />
+
+                </DialogContent>
+
+                <DialogActions>
+                  <Button onClick={handleClose} color="primary">Cancel</Button>
+                  <Button onClick={handleClose} color="primary">Log In</Button>
+                </DialogActions>
+              </Dialog>
+
+
             </Box>
             <Button color="secondary" variant="contained">Sign Up</Button>
 
